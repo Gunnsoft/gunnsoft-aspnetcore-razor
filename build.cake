@@ -75,16 +75,17 @@ Task("Pack")
     {
         CreateDirectory(artifactsDirectory);
 
-        var artifactFilePath = $@"{artifactsDirectory}\gunnsoft-aspnetcore-razor.nupkg";
+        CopyFile($@".\src\Gunnsoft.AspNetCore.Razor\bin\{configuration}\Gunnsoft.AspNetCore.Razor.{version}.nupkg", $@"{artifactsDirectory}\gunnsoft-aspnetcore-razor.nupkg"); 
         
-        CopyFile($@".\src\Gunnsoft.AspNetCore.Razor\bin\{configuration}\Gunnsoft.AspNetCore.Razor.{version}.nupkg", artifactFilePath); 
-        
-        if (AppVeyor.IsRunningOnAppVeyor)
-        {
-            AppVeyor.UploadArtifact(artifactFilePath, new AppVeyorUploadArtifactsSettings
+        foreach (var filePath in GetFiles($@"{artifactsDirectory}\*.*")) 
+        { 
+            if (AppVeyor.IsRunningOnAppVeyor)
             {
-                DeploymentName = "gunnsoft-aspnetcore-razor"
-            });
+                AppVeyor.UploadArtifact(filePath, new AppVeyorUploadArtifactsSettings
+                {
+                    DeploymentName = filePath.GetFilename()
+                });
+            }
         }
     });
 
