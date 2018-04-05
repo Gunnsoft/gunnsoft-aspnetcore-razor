@@ -83,7 +83,7 @@ Task("Pack")
             {
                 AppVeyor.UploadArtifact(filePath, new AppVeyorUploadArtifactsSettings
                 {
-                    DeploymentName = filePath.GetFilename()
+                    DeploymentName = filePath.GetFilename().ToString()
                 });
             }
         }
