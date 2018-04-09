@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace Stubbl.Identity.TagHelpers
+namespace Gunnsoft.AspNetCore.Razor.TagHelpers
 {
     [HtmlTargetElement("img", Attributes = EmailAddressAttributeName)]
     public class GravatarTagHelper : TagHelper

@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
-//using Microsoft.AspNetCore.Mvc.TagHelpers;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace Stubbl.Identity.TagHelpers
+namespace Gunnsoft.AspNetCore.Razor.TagHelpers
 {
     [HtmlTargetElement("input", Attributes = ForAttributeName)]
     [HtmlTargetElement("select", Attributes = ForAttributeName)]
@@ -52,13 +51,7 @@ namespace Stubbl.Identity.TagHelpers
                 tagBuilder.AddCssClass("is-valid");
             }
 
-            foreach (var attribute in tagBuilder.Attributes)
-            {
-                var name = Convert.ToString(attribute.Key, CultureInfo.InvariantCulture);
-                var value = Convert.ToString(attribute.Value, CultureInfo.InvariantCulture);
-
-                output.Attributes.SetAttribute(name, value);
-            }
+            output.MergeAttributes(tagBuilder);
         }
     }
 }
